@@ -4,7 +4,8 @@ import {solve} from "./solutions/solutionOne";
 function App() {
   return (
     <div className="App">
-      {solve()}
+      <button onClick={solve}>Solve</button>
+      {/* {solve()} */}
     </div>
   );
 }

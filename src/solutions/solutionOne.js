@@ -1,30 +1,15 @@
-const printGrid = (g) => {
-  for (let row of g) {
-    console.log(row.join("  "));
-  }
-}
+const printGrid = (g, round) => {
+  console.log(`---------ROUND-${round}---------`);
+  g.forEach(row => console.log(row.join(" ")))
+};
 
 const gridsMatch = (g1, g2) => {
-  for (let i = 0; i < g1.length; i++) {
-    for (let j = 0; j < g1.length; j++) {
-      if (g1[i][j] !== g2[i][j]) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
+  return !g1.some((row, i) => row.some((el, j) => el !== g2[i][j]));
+};
 
 const getColumn = (index, g) => g.map(row => row[index]);
 
-const isZeroInGrid = g => {
-  for (let row of g) {
-    if (row.some(el => el === 0)) {
-      return true;
-    };
-  }
-  return false;
-};
+const isZeroInGrid = g => g.some(row => row.some(el => el === 0));
 
 const notInRowOrCol = (el, row, col, g) => {
   const inRow = g[row].includes(el);
@@ -43,6 +28,7 @@ const notInBox = (el, row, col, g) => {
       box.push(g[i][j]);
     }
   }
+
   return !box.includes(el);
 };
 
@@ -58,11 +44,23 @@ let grid = [
   [0, 7, 0, 4, 9, 0, 8, 5, 2]
 ];
 
-const range = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-let round = 0;
-let unsolved = isZeroInGrid(grid);
+// let grid = [
+//   [0, 0, 9, 0, 0, 0, 4, 6, 3],
+//   [0, 0, 6, 3, 4, 0, 5, 2, 9],
+//   [2, 3, 4, 5, 6, 9, 7, 1, 8],
+//   [0, 6, 7, 0, 0, 0, 3, 4, 0],
+//   [0, 4, 0, 0, 3, 0, 2, 9, 0],
+//   [0, 2, 0, 0, 0, 0, 6, 8, 0],
+//   [0, 0, 2, 0, 0, 1, 9, 3, 4],
+//   [4, 9, 3, 8, 2, 5, 1, 7, 6],
+//   [0, 7, 0, 4, 9, 3, 8, 5, 2]
+// ];
 
 export const solve = () => {
+  const range = Array.from(Array(9).keys(), x => x + 1);
+  let unsolved = isZeroInGrid(grid);
+  let round = 0;
+  
   while (unsolved) {
     let newGrid = [];
     let possibleValues = {};
@@ -89,13 +87,13 @@ export const solve = () => {
         }
       }
     }
-
+    // debugger
     let match = gridsMatch(grid, newGrid);
 
     match ? console.log("This one is too hard!") : grid = newGrid;
     unsolved = match ? false : isZeroInGrid(newGrid);
   }
-  console.log(`---------ROUND-${round}---------`);
-  printGrid(grid);
-}
+
+  printGrid(grid, round);
+};
 
