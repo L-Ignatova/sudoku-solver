@@ -6,7 +6,6 @@ function App() {
     <div className="App">
       <Grid />
       <button onClick={solve}>Solve</button>
-      {/* {solve()} */}
     </div>
   );
 }

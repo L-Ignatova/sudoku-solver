@@ -9,6 +9,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+input {
+  padding: 0;
+  text-align:center;
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -18,8 +23,8 @@ body {
 .table {
   margin: 50px auto;
 
-  width: 315px;
-  height: 315px;
+  width: 333px;
+  height: 333px;
 }
 
 .row {
