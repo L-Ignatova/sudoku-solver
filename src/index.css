@@ -12,6 +12,10 @@ body {
 input {
   padding: 0;
   text-align:center;
+  font-size: 18px;
+}
+input:invalid {
+  background-color: rgb(252, 117, 117);
 }
 
 .App {
@@ -20,7 +24,7 @@ input {
   align-items: center;
 }
 
-.table {
+.grid {
   margin: 50px auto;
 
   width: 333px;
