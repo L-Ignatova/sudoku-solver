@@ -1,36 +1,10 @@
-const printGrid = (g, round) => {
-  console.log(`---------ROUND-${round}---------`);
-  g.forEach(row => console.log(row.join(" ")))
-};
-
-const gridsMatch = (g1, g2) => {
-  return !g1.some((row, i) => row.some((el, j) => el !== g2[i][j]));
-};
-
-const getColumn = (index, g) => g.map(row => row[index]);
-
-const isZeroInGrid = g => g.some(row => row.some(el => el === 0));
-
-const notInRowOrCol = (el, row, col, g) => {
-  const inRow = g[row].includes(el);
-  const inCol = getColumn(col, g).includes(el);
-
-  return !inRow && !inCol;
-};
-
-const notInBox = (el, row, col, g) => {
-  const box_x = Math.floor(row / 3);
-  const box_y = Math.floor(col / 3);
-  let box = [];
-
-  for (let i = box_x * 3; i < box_x * 3 + 3; i++) {
-    for (let j = box_y * 3; j < box_y * 3 + 3; j++) {
-      box.push(g[i][j]);
-    }
-  }
-
-  return !box.includes(el);
-};
+import {
+  notInRowOrCol,
+  notInBox,
+  gridsMatch,
+  isZeroInGrid,
+  printGrid,
+} from "./utils";
 
 // let grid = [
 //   [0, 0, 0, 0, 0, 0, 4, 0, 3],
@@ -87,7 +61,7 @@ export const solve = () => {
         }
       });
     });
-    // debugger
+    
     let match = gridsMatch(grid, newGrid);
 
     match ? console.log("This one is too hard!") : grid = newGrid;
