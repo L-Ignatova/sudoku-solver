@@ -30,24 +30,29 @@ export let grid = [
 ];
 
 const range = Array.from(Array(9).keys(), x => x + 1);
-let round = 0;
-let startTime;
-let endTime;
+let solution;
+
+export const startExecution = (initialGrid) => {
+  const startTime = performance.now();
+  
+  solve(initialGrid);
+  
+  const endTime = performance.now();
+
+  return {
+    executionTime: `Execution time: ${Math.floor((endTime - startTime)/1000)}s ${Math.floor((endTime - startTime)%1000)}ms`, 
+    grid: solution
+  };
+}
 
 export const solve = (grid) => {
   let newGrid = [];
-
-  if (round === 0) {
-    startTime = performance.now();
-  }
   
   if (!isZeroInGrid(grid)) {
-    endTime = performance.now();
-    console.log(`Execution time: ${Math.floor((endTime - startTime)/1000)}s ${Math.floor((endTime - startTime)%1000)}ms`);
-    printGrid(grid, round);
+    solution = grid;
+    printGrid(grid);
     return true;
   }
-  round += 1;
 
   for (let [i, row] of grid.entries()) {
     newGrid.push([]);

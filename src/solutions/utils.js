@@ -1,5 +1,4 @@
-const printGrid = (gridToPrint, round) => {
-  console.log(`---------ROUND-${round}---------`);
+const printGrid = (gridToPrint) => {
   gridToPrint.forEach(row => console.log(row.join(" ")))
 };
 
